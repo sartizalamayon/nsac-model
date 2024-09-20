@@ -24,3 +24,7 @@ def home():
 def predict(payload: TextIn):
     language = predict_pipeline(payload.text)
     return {"language": language}
+
+@app.get('/say_hello')
+def say_hello():
+    return {"message": "Hello World!"}
