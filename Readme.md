@@ -8,6 +8,9 @@
 - Readme.md
 
 ## How to run the project
+- pip install fastapi uvicorn
+- pip install -r requirements.txt
+- uvicorn app.main:app --reload
 
 
 

@@ -17,7 +17,7 @@ class PredictionOut(BaseModel):
 # endpoints
 @app.get("/")
 def home():
-    return {"health_check": "OK", "model_version": model_version}
+    return {"model_check": "OK", "model_version": model_version}
 
 
 @app.post("/predict", response_model=PredictionOut)
