@@ -1,30 +1,36 @@
 from fastapi import FastAPI 
-from pydantic import BaseModel # pydantic models to validate request and response
-from app.model.model import predict_pipeline # function to predict language
-from app.model.model import __version__ as model_version # model version
-
+from pydantic import BaseModel
+from app.model.model import predict_pipeline
 
 app = FastAPI()
 
-# pydantic models
-class TextIn(BaseModel):
-    text: str
+# pydantic model for input
+class PlantGrowthIn(BaseModel):
+    soil_type: str
+    water_frequency: str
+    fertilizer_type: str
+    sunlight_hours: float
+    temperature: float
+    humidity: float
 
-
+# pydantic model for output
 class PredictionOut(BaseModel):
-    language: str
+    growth_stage: str
 
-# endpoints
+# Root endpoint
 @app.get("/")
 def home():
-    return {"model_check": "OK", "model_version": model_version}
+    return {"model_check": "OK"}
 
-
+# Predict endpoint
 @app.post("/predict", response_model=PredictionOut)
-def predict(payload: TextIn):
-    language = predict_pipeline(payload.text)
-    return {"language": language}
-
-@app.get('/say_hello')
-def say_hello():
-    return {"message": "Hello World!"}
+def predict(payload: PlantGrowthIn):
+    growth_stage = predict_pipeline(
+        payload.soil_type, 
+        payload.water_frequency, 
+        payload.fertilizer_type, 
+        payload.sunlight_hours,
+        payload.temperature,
+        payload.humidity
+    )
+    return {"growth_stage": growth_stage}

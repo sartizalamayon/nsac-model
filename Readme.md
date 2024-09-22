@@ -1,8 +1,9 @@
 ## File Structure
 - app
     - model
-        - model.py (model class: functions to interact with the model)
-        - trained_pipeline-0.1.0.pkl (pretrained model pickle file)
+        - plantGrowthModel
+            - plant_growth_model.pkl
+        - model.py
     - main.py (main file to run the FastAPI and api endpoints)
 - .gitignore
 - Readme.md
