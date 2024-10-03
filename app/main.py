@@ -53,17 +53,17 @@ def predict(payload: PlantGrowthIn):
     return {"growth_stage": growth_stage, "suggestion": suggestion}
 
 
-# Endpoint for soil type prediction
-@app.post("/predict-soil-type")
-async def predict_soil_type(file: UploadFile = File(...)):
-    try:
-        # Read the uploaded image file
-        image_bytes = await file.read()
-        image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+# # Endpoint for soil type prediction
+# @app.post("/predict-soil-type")
+# async def predict_soil_type(file: UploadFile = File(...)):
+#     try:
+#         # Read the uploaded image file
+#         image_bytes = await file.read()
+#         image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
 
-        # Classify the soil type
-        predicted_soil_type = classify_soil(image)
-        return {"soil_type": predicted_soil_type}
+#         # Classify the soil type
+#         predicted_soil_type = classify_soil(image)
+#         return {"soil_type": predicted_soil_type}
 
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+#     except Exception as e:
+#         raise HTTPException(status_code=400, detail=str(e))
