@@ -7,6 +7,9 @@
     - main.py (main file to run the FastAPI and api endpoints)
 - .gitignore
 - Readme.md
+- Procfile
+- requirements.txt
+- .env
 
 ## How to run the project
 ```bash
