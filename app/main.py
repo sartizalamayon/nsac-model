@@ -1,6 +1,8 @@
 from fastapi import FastAPI 
 from pydantic import BaseModel
 from app.model.model import predict_pipeline
+from app.services.gemini_service import get_gemini_response
+
 
 app = FastAPI()
 
@@ -16,6 +18,7 @@ class PlantGrowthIn(BaseModel):
 # pydantic model for output
 class PredictionOut(BaseModel):
     growth_stage: str
+    suggestion: str
 
 # Root endpoint
 @app.get("/")
@@ -33,4 +36,26 @@ def predict(payload: PlantGrowthIn):
         payload.temperature,
         payload.humidity
     )
-    return {"growth_stage": growth_stage}
+    data = {
+        "soil_type": payload.soil_type,
+        "water_frequency": payload.water_frequency,
+        "fertilizer_type": payload.fertilizer_type,
+        "sunlight_hours": payload.sunlight_hours,
+        "temperature": payload.temperature,
+        "humidity": payload.humidity,
+        "growth_stage": growth_stage
+    }
+    suggestion = get_gemini_response(data)
+    print(suggestion)
+    return {"growth_stage": growth_stage, "suggestion": suggestion}
+
+
+# soil_type: "Loamy"
+# water_frequency: "Daily"
+# fertilizer_type: "Organic"
+# sunlight_hours: 8
+# temperature: 25
+# humidity: 60
+# growth_stage: "Vegetative"
+
+
