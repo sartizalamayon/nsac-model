@@ -1,6 +1,6 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
-from app.model.model import predict_pipeline, classify_soil
+from app.model.model import predict_pipeline
 from app.services.gemini_service import get_gemini_response
 from PIL import Image
 import io
