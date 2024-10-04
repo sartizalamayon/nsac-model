@@ -3,6 +3,10 @@
     - model
         - plantGrowthModel
             - plant_growth_model.pkl
+        - soilClassifierModel
+            - soil_type.pth
+        - juteDiseaseModel
+            - jute_disease_model.h5
         - model.py
     - main.py (main file to run the FastAPI and api endpoints)
 - .gitignore
